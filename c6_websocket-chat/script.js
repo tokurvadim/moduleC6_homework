@@ -71,7 +71,7 @@ inputUserMessageNode.addEventListener('keydown', (key) => {
     if (key.keyCode === 13) btnSendMessageNode.click();
 })
 btnGetLocationNode.addEventListener('click', () => {
-    if ("geolocation" in navigator) {
+    if ("geolocation" in navigator && websocket.readyState !== 3) {
         createMessageElement('client', "Геопозиция")
         navigator.geolocation.getCurrentPosition((position) => {
             const latitude = position.coords.latitude;
@@ -84,6 +84,6 @@ btnGetLocationNode.addEventListener('click', () => {
             }
         });
     } else {
-        alert('Невозможно получить геопозицию: Ваш браузер не поддерживает эту технологию!')
+        alert('Невозможно получить геопозицию!')
     }
 })
