@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+button {
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #bc46ff;
+    color: #ffffff;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffffff;
+    color: #bc46ff;
+    border: 2px solid #bc46ff;
+}
