@@ -45,9 +45,12 @@ window.addEventListener('load', () => {
 
     websocket.onopen = () => {
         outputConnectionStatus(connectionStatusMessage, "Соединение установлено!", "green");
-    };
+    }
     websocket.onerror = () => {
         outputConnectionStatus(connectionStatusMessage, "Ошибка сервера!", "red");
+    }
+    websocket.onclose = () => {
+        outputConnectionStatus(connectionStatusMessage, "Соединение разорвано!", "yellow");
     }
     wrapperNode.appendChild(connectionStatusMessage);
 })
@@ -74,7 +77,13 @@ btnGetLocationNode.addEventListener('click', () => {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             const urlMap = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-            createMessageElement('server', `Геопозиция`, urlMap);
+            websocket.send(urlMap);
+            websocket.onmessage = (event) => {
+                const serverMessage = event.data;
+                createMessageElement('server', `Геопозиция`, serverMessage);
+            }
         });
+    } else {
+        alert('Невозможно получить геопозицию: Ваш браузер не поддерживает эту технологию!')
     }
 })
